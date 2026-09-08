@@ -1,0 +1,52 @@
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        // method 1 using linked list 
+    //    ListNode* slow=head;
+    //    ListNode* fast=head;
+    //    while(fast!=nullptr && fast->next!=nullptr){
+    //      slow=slow->next;
+    //      fast=fast->next->next;
+    //    } 
+    //    if(fast!=nullptr){
+    //     slow=slow->next;
+    //    }
+    //    ListNode* curr=slow;
+    //    ListNode* prev=nullptr;
+    //    ListNode* nextnode;
+    //    while(curr!=nullptr){
+    //     nextnode=curr->next;
+    //     curr->next=prev;
+    //     prev=curr;
+    //     curr=nextnode;
+    //    }
+    //    ListNode* left=head;
+    //    ListNode* right=prev;
+    //    while(right!=nullptr){
+    //     if(right->val!=left->val){
+    //         return false;
+    //     }
+    //     right=right->next;
+    //     left=left->next;
+    //    }
+    //    return true;
+
+    //  method 2 using vectors 
+    vector<int>arr;
+    ListNode* curr=head;
+    while(curr!=nullptr){
+        arr.push_back(curr->val);
+        curr= curr->next;
+    }
+    int left=0;
+    int right=arr.size()-1;
+    while(left<right){
+        if(arr[left]!=arr[right]){
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+    }
+};
