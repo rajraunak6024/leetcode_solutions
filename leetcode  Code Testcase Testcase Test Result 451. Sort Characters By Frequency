@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string frequencySort(string s) {
+      int n=s.length();
+      map<char,int>m;
+      for(char i:s){
+        m[i]++;
+      }
+      map<int,vector<char>>m1;
+      for(auto it:m){
+        m1[it.second].push_back(it.first);
+      }
+      string ans="";
+      for(auto it=m1.rbegin();it!=m1.rend();it++){
+          for (char c : it->second) {
+            ans += string(it->first, c);
+            }
+
+      }
+      return ans;
+    }
+};
