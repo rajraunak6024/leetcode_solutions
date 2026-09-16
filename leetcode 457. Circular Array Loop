@@ -1,0 +1,62 @@
+class Solution {
+public:
+
+    int nextIndex(vector<int>& nums, int i) {
+        int n = nums.size();
+
+        return (i + nums[i] % n + n) % n;
+    }
+
+    bool circularArrayLoop(vector<int>& nums) {
+
+        int n = nums.size();
+
+        for (int i = 0; i < n; i++) {
+
+            int slow = i;
+            int fast = i;
+
+            // slow and fast must move in the same direction
+            while (true) {
+
+                // Check slow's next position
+                int nextSlow = nextIndex(nums, slow);
+
+                // Direction changed
+                if ((nums[slow] > 0) != (nums[nextSlow] > 0))
+                    break;
+
+                // Move slow once
+                slow = nextSlow;
+
+                // Move fast once
+                int nextFast = nextIndex(nums, fast);
+
+                if ((nums[fast] > 0) != (nums[nextFast] > 0))
+                    break;
+
+                fast = nextFast;
+
+                // Move fast second time
+                nextFast = nextIndex(nums, fast);
+
+                if ((nums[fast] > 0) != (nums[nextFast] > 0))
+                    break;
+
+                fast = nextFast;
+
+                // They met
+                if (slow == fast) {
+
+                    // One-element cycle is not allowed
+                    if (slow == nextIndex(nums, slow))
+                        break;
+
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+};
