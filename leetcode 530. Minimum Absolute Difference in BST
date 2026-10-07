@@ -1,0 +1,21 @@
+class Solution {
+public:
+    void findinorder(TreeNode* root,vector<TreeNode*>& arr){
+        if(root==NULL){
+            return ;
+        }
+        findinorder(root->left,arr);
+        arr.push_back(root);
+        findinorder(root->right,arr);
+    }
+    int getMinimumDifference(TreeNode* root) {
+      vector<TreeNode*>arr;
+       findinorder(root,arr);
+       int n=arr.size();
+       int ans=INT_MAX;
+       for(int i=1;i<n;i++){
+         ans=min(ans,(arr[i]->val-arr[i-1]->val));
+       }
+       return ans;  
+    }
+};
